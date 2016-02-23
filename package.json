@@ -1,0 +1,25 @@
+{
+  "name": "slate",
+  "version": "1.0.0",
+  "description": "Slate API Documentation Multiplexer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcosgrove/slate.git"
+  },
+  "author": "David Cosgrove <dcosgrove@paperlesspost.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dcosgrove/slate/issues"
+  },
+  "homepage": "https://github.com/dcosgrove/slate#readme",
+  "dependencies": {
+    "bluebird": "^3.3.1",
+    "express": "^4.13.4",
+    "lodash": "^4.5.1",
+    "morgan": "^1.7.0"
+  }
+}
