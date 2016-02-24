@@ -3,6 +3,7 @@ var Promise = require('bluebird');
 var express = require('express');
 var morgan = require('morgan');
 
+var config = require('./config');
 var routes = require('./routes');
 
 // temporary hard coded list til we pull from somewhere
@@ -28,9 +29,7 @@ multiplexer.then(function(multiplexer) {
   });
 })
 .then(function() {
-  server.listen(8001, function() {
-    console.log('server started on port', 8001);
+  server.listen(config.port, function() {
+    console.log('PP Slate multiplexer started on port', config.port);
   });
-
-  
 });
