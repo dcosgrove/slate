@@ -11,11 +11,9 @@ var config = require('./config');
 var s3 = new aws.S3();
 
 // make sure our destination directory exists on startup
-
 var DEST_DIR = './downloads/';
 mkdirp.sync(DEST_DIR);
 
-// pull the list of filenames that we want to download
 var listFiles = function() {
 
   return new Promise(function(resolve, reject) {
@@ -35,7 +33,6 @@ var listFiles = function() {
   });
 };
 
-// get the file contents
 var fetchFile = function(file) {
 
   return new Promise(function(resolve, reject) {
@@ -52,7 +49,6 @@ var fetchFile = function(file) {
   });
 };
 
-// write this thing to disk
 var saveFile = function(file, buffer) {
   return Promise.promisify(fs.writeFile)(DEST_DIR + file, buffer);
 };
