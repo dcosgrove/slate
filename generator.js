@@ -78,5 +78,3 @@ module.exports = {
     });
   } 
 };
-
-module.exports.build('test.md');
