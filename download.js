@@ -56,5 +56,21 @@ var saveFile = function(file, buffer) {
 module.exports = {
   listFiles: listFiles,
   fetchFile: fetchFile,
-  saveFile: saveFile
+  saveFile: saveFile,
+  pullAllFiles: function() {
+    return listFiles()
+    .then(function(files) {
+      return Promise.all(
+        files.map(function(file) {
+          return fetchFile(file)
+          .then(function(buffer) {
+            return saveFile(file, buffer)
+          });
+        })
+      )
+      .then(function() {
+        return files;
+      });
+    });
+  }
 };

@@ -10,28 +10,13 @@ var projectName = function(file) {
   return /(.*)\.md/.exec(file)[1];
 };
 
-var cloneWorkDir = function(src, dst) {
-  return Promise.promisify(mkdirp)(dst)
-  .then(function() {
-    return fs.readdirAsync(src);
-  })
-  .then(function(srcFiles) {
-    // symlink to all of the base slate files in our work dir
-    return Promise.all(
-      srcFiles.map(function(file) {
-        return fs.symlinkAsync(path.resolve(src + file), dst + file);
-      })
-    );
-  })
-};
-
 var prepare = function(projectFile) {
   var workDir = WORKSPACE_BASE + projectFile + '/';
   var slateDir = './slate/';
 
-  return cloneWorkDir(slateDir, workDir)
+  return fs.copyAsync(slateDir, workDir)
   .then(function() {
-    return fs.copyAsync('./downloads/' + projectFile, workDir + 'index.html.md');
+    return fs.copyAsync('./downloads/' + projectFile, workDir + 'source/index.html.md');
   })
   .then(function() {
     return workDir;
@@ -66,15 +51,21 @@ var cleanup = function(dir) {
 
 module.exports = {
   build: function(projectFile) {
+
+    var name = projectName(projectFile);
+
     return prepare(projectFile)
     .then(function(workDir) {
       return compile(workDir)
       .then(function(siteDir) {
-        return install(projectName(projectFile), siteDir);
+        return install(name, siteDir);
       })
       .then(function() {
         return cleanup(workDir);
       });
+    })
+    .then(function() {
+      return name;
     });
   } 
 };
