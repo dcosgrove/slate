@@ -6,6 +6,8 @@ var morgan = require('morgan');
 var config = require('./config');
 var routes = require('./routes');
 
+var download = require('./download');
+
 // temporary hard coded list til we pull from somewhere
 var sites = [
   'forex',
