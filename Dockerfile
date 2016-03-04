@@ -14,6 +14,8 @@ RUN bundle install
 
 WORKDIR /app
 
+RUN npm install
+
 EXPOSE 5000
 
 CMD ["node", "."]
