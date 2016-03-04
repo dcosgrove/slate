@@ -14,6 +14,6 @@ RUN bundle install
 
 WORKDIR /app
 
-EXPOSE 8000
+EXPOSE 5000
 
 CMD ["node", "."]
